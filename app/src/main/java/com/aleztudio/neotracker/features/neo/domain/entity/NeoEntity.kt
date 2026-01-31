@@ -7,5 +7,9 @@ data class Neo(
 
     val dangerous: Boolean,
 
-    val speedKmSec:Float
+    val speedKmSec:Float,
+
+    val date: String,
+
+    val url: String,
 )

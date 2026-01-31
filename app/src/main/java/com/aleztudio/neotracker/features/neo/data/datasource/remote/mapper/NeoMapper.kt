@@ -7,14 +7,19 @@ fun NeoDto.toDomain(): Neo{
     return Neo(
         name = this.name,
 
-        diameter = this.estimatedDiameter.kilometers.estimatedDiameterMin +
-                this.estimatedDiameter.kilometers.estimatedDiameterMax,
+        diameter = this.estimatedDiameter.kilometers.estimatedDiameterMax,
 
         dangerous = this.isPotentiallyHazardousAsteroid,
 
         speedKmSec = this.closeApproachData.firstOrNull()
             ?.relativeVelocity
             ?.kilometersPerSecond
-            ?.toFloatOrNull() ?: 0f
+            ?.toFloatOrNull() ?: 0f,
+
+        date = this.closeApproachData.firstOrNull()
+            ?.date ?:"",
+
+        url = this.nasaJplUrl,
+
     )
 }

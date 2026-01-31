@@ -1,6 +1,10 @@
 package com.aleztudio.neotracker.features.neo.presentation.components
 
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -35,6 +40,9 @@ fun NeoCard(
     diameter: Float,
     dangerous: Boolean,
     speedKmSec: Float,
+    url: String,
+    date: String,
+    onUrlClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -116,27 +124,77 @@ fun NeoCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(
-                        if (dangerous)
-                            MaterialTheme.colorScheme.error
-                        else
-                            MaterialTheme.colorScheme.primary
-                    )
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
+            // Fecha
+            InfoItem(
+                label = "Fecha de aproximación",
+                value = date,
+                modifier = Modifier.fillMaxWidth(),
+                dangerous = dangerous
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Row con estado de peligro y botón
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = if (dangerous) "⚠️ POTENCIALMENTE PELIGROSO" else "✓ No peligroso",
-                    style = MaterialTheme.typography.labelSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = if (dangerous)
-                        MaterialTheme.colorScheme.onError
-                    else
-                        MaterialTheme.colorScheme.onPrimary
-                )
+                // Estado de peligro
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(
+                            if (dangerous)
+                                MaterialTheme.colorScheme.error
+                            else
+                                MaterialTheme.colorScheme.primary
+                        )
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                ) {
+                    Text(
+                        text = if (dangerous) "⚠️ POTENCIALMENTE PELIGROSO" else "✓ No peligroso",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = if (dangerous)
+                            MaterialTheme.colorScheme.onError
+                        else
+                            MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+                // Botón de navegación
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .clickable { onUrlClick(url) }
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text(
+                            text = "Ver en base de datos",
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Default.ArrowForward,
+                            contentDescription = "Abrir enlace",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(14.dp)
+                        )
+                    }
+                }
             }
+
         }
     }
 }

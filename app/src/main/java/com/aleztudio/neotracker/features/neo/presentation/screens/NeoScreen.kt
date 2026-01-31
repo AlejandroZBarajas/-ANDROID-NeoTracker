@@ -27,7 +27,8 @@ import androidx.compose.ui.Alignment
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NeoScreen(
-    factory: NeoViewModelFactory
+    factory: NeoViewModelFactory,
+    onNavigateToUrl: (String) -> Unit
 ){
     val viewModel: NeoViewModel = viewModel(factory = factory)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -65,8 +66,7 @@ fun NeoScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(8.dp)
                     ){
-                        items(uiState.neos){
-                            neo ->
+                        items(uiState.neos){ neo ->
                             NeoCard(
                                 name = neo.name,
 
@@ -74,7 +74,13 @@ fun NeoScreen(
 
                                 dangerous = neo.dangerous,
 
-                                speedKmSec = neo.speedKmSec
+                                speedKmSec = neo.speedKmSec,
+
+                                date = neo.date,
+
+                                url= neo.url,
+
+                                onUrlClick = onNavigateToUrl
 
                             )
                         }

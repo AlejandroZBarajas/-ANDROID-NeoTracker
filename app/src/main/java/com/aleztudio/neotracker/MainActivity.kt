@@ -15,7 +15,8 @@ import com.aleztudio.neotracker.ui.theme.NEOTrackerTheme
 import com.aleztudio.neotracker.features.neo.presentation.screens.NeoScreen
 import com.aleztudio.neotracker.features.neo.presentation.viewModels.NeoViewModelFactory
 import com.aleztudio.neotracker.core.di.AppContainer
-
+import android.content.Intent
+import android.net.Uri
 class MainActivity : ComponentActivity() {
 
     private lateinit var appContainer: AppContainer
@@ -29,7 +30,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             NEOTrackerTheme {
                 NeoScreen(
-                    factory = NeoViewModelFactory(appContainer.getNeoUseCase)
+                    factory = NeoViewModelFactory(appContainer.getNeoUseCase),
+                    onNavigateToUrl =  { url ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                    }
                 )
             }
         }
