@@ -1,15 +1,15 @@
 package com.aleztudio.neotracker.features.neo.data.repository
 
-import com.aleztudio.neotracker.core.network.NeoApi
-import com.aleztudio.neotracker.features.neo.domain.interfaces.NeoRepository
+import com.aleztudio.neotracker.features.neo.data.datasource.remote.api.NeoApi
+import com.aleztudio.neotracker.features.neo.domain.repositories.NeoRepository
 import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 import com.aleztudio.neotracker.features.neo.data.datasource.remote.mapper.toDomain
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import android.util.Log
-import com.aleztudio.neotracker.BuildConfig
+import javax.inject.Inject
 
-class NeoRepositoryImplementation(
+class NeoRepositoryImplementation @Inject constructor(
     private val api: NeoApi
 ): NeoRepository{
     override suspend fun getNeo(startDate: String?, endDate: String?): List<Neo> {
@@ -18,14 +18,8 @@ class NeoRepositoryImplementation(
         val startDate = LocalDate.now().format(formatter)
         val endDate = LocalDate.now().plusDays(7).format(formatter)
 
-        Log.e("NeoRepository", "===== INICIANDO PETICIÓN =====")
-        Log.e("NeoRepository", "StartDate: $startDate")
-        Log.e("NeoRepository", "EndDate: $endDate")
-        Log.e("NeoRepository", "Base URL: ${BuildConfig.BASE_URL}")
-        Log.e("NeoRepository", "URL completa: ${BuildConfig.BASE_URL}neo/rest/v1/feed?start_date=$startDate&end_date=$endDate&api_key=FGPZ4mbZV2rfWKS99Cogk0u0EjzcPNMtojVmfWs1")
-
         try{
-            val response = api.getNeos(
+            val response = api.getNeo (
                 startDate= startDate,
                 endDate= endDate
             )
@@ -40,7 +34,5 @@ class NeoRepositoryImplementation(
             Log.e("NeoRepository", "Stack trace: ", e)
             throw e
         }
-
-
     }
 }

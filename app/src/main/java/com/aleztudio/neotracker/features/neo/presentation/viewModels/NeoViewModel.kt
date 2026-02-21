@@ -1,17 +1,19 @@
 package com.aleztudio.neotracker.features.neo.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 import com.aleztudio.neotracker.features.neo.domain.useCases.GetNeoUseCase
 import com.aleztudio.neotracker.features.neo.presentation.screens.NeoUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class NeoViewModel(
+@HiltViewModel
+class NeoViewModel @Inject constructor(
     private val getNeoUseCase: GetNeoUseCase
 ): ViewModel(){
     private val _uiState = MutableStateFlow(NeoUiState())
