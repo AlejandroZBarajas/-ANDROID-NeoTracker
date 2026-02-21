@@ -13,28 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.aleztudio.neotracker.ui.theme.NEOTrackerTheme
 import com.aleztudio.neotracker.features.neo.presentation.screens.NeoScreen
-import com.aleztudio.neotracker.features.neo.presentation.viewModels.NeoViewModelFactory
-import com.aleztudio.neotracker.core.di.AppContainer
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
 
-    private lateinit var appContainer: AppContainer
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity(){
+    override fun onCreate ( savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        appContainer = AppContainer(applicationContext
-        )
-        setContent {
-            NEOTrackerTheme {
-                NeoScreen(
-                    factory = NeoViewModelFactory(appContainer.getNeoUseCase)
-                )
+        setContent{
+            NEOTrackerTheme() {
+                NeoScreen()
             }
         }
     }
 }
-
-
-

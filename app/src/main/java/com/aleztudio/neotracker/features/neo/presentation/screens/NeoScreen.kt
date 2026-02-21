@@ -18,18 +18,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 import com.aleztudio.neotracker.features.neo.presentation.viewModels.NeoViewModel
-import com.aleztudio.neotracker.features.neo.presentation.viewModels.NeoViewModelFactory
 import com.aleztudio.neotracker.features.neo.presentation.components.NeoCard
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NeoScreen(
-    factory: NeoViewModelFactory
+    viewModel : NeoViewModel = hiltViewModel()
 ){
-    val viewModel: NeoViewModel = viewModel(factory = factory)
+    val viewModel: NeoViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold (
