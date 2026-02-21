@@ -1,7 +1,6 @@
 package com.aleztudio.neotracker.features.neo.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 import com.aleztudio.neotracker.features.neo.domain.useCases.GetNeoUseCase
 import com.aleztudio.neotracker.features.neo.presentation.screens.NeoUiState
 import kotlinx.coroutines.flow.MutableStateFlow

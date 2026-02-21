@@ -1,7 +1,7 @@
 package com.aleztudio.neotracker.features.neo.domain.useCases
 
 import com.aleztudio.neotracker.features.neo.domain.entity.Neo
-import com.aleztudio.neotracker.features.neo.domain.interfaces.NeoRepository
+import com.aleztudio.neotracker.features.neo.domain.repositories.NeoRepository
 import javax.inject.Inject
 
 class GetNeoUseCase @Inject constructor(

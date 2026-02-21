@@ -1,13 +1,12 @@
 package com.aleztudio.neotracker.features.neo.data.repository
 
 import com.aleztudio.neotracker.features.neo.data.datasource.remote.api.NeoApi
-import com.aleztudio.neotracker.features.neo.domain.interfaces.NeoRepository
+import com.aleztudio.neotracker.features.neo.domain.repositories.NeoRepository
 import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 import com.aleztudio.neotracker.features.neo.data.datasource.remote.mapper.toDomain
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import android.util.Log
-import com.aleztudio.neotracker.BuildConfig
 import javax.inject.Inject
 
 class NeoRepositoryImplementation @Inject constructor(
@@ -20,7 +19,7 @@ class NeoRepositoryImplementation @Inject constructor(
         val endDate = LocalDate.now().plusDays(7).format(formatter)
 
         try{
-            val response = api.getNeos (
+            val response = api.getNeo (
                 startDate= startDate,
                 endDate= endDate
             )

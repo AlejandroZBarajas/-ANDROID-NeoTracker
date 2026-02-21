@@ -29,7 +29,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun NeoScreen(
     viewModel : NeoViewModel = hiltViewModel()
 ){
-    val viewModel: NeoViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold (

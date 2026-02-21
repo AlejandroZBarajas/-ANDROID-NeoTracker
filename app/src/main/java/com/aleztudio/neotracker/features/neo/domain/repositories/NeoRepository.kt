@@ -1,4 +1,4 @@
-package com.aleztudio.neotracker.features.neo.domain.interfaces
+package com.aleztudio.neotracker.features.neo.domain.repositories
 
 import com.aleztudio.neotracker.features.neo.domain.entity.Neo
 

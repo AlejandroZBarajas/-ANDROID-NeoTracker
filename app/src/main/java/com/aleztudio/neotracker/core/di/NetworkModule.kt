@@ -1,20 +1,27 @@
 package com.aleztudio.neotracker.core.di
 
-import com.aleztudio.neotracker.features.neo.data.datasource.remote.api.NeoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NeoTrakerNetworkModule {
+
+object NetworkModule {
     @Provides
     @Singleton
+    @NeoRetrofit
 
-    fun provideNeoApi(@NeoRetrofit retrofit: Retrofit): NeoApi{
-        return retrofit.create(com.aleztudio.neotracker.features.neo.data.datasource.remote.api.NeoApi::class.java)
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://api.nasa.gov/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 }
