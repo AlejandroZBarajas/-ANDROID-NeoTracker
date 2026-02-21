@@ -14,6 +14,9 @@ data class NeoDto(
     @SerializedName("name")
     val name: String,
 
+    @SerializedName("nasa_jpl_url")
+    val nasaJplUrl: String,
+
     @SerializedName("estimated_diameter")
     val estimatedDiameter: EstimatedDiameter,
 
@@ -39,7 +42,10 @@ data class DiameterRange(
 
 data class CloseApproachData(
     @SerializedName("relative_velocity")
-    val relativeVelocity: RelativeVelocity
+    val relativeVelocity: RelativeVelocity,
+
+    @SerializedName("close_approach_date_full")
+    val date: String,
 )
 
 data class RelativeVelocity(

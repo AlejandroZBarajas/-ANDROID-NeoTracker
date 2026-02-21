@@ -64,8 +64,7 @@ fun NeoScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(8.dp)
                     ){
-                        items(uiState.neos){
-                            neo ->
+                        items(uiState.neos){ neo ->
                             NeoCard(
                                 name = neo.name,
 
@@ -73,7 +72,13 @@ fun NeoScreen(
 
                                 dangerous = neo.dangerous,
 
-                                speedKmSec = neo.speedKmSec
+                                speedKmSec = neo.speedKmSec,
+
+                                date = neo.date,
+
+                                url= neo.url,
+
+                                onUrlClick = onNavigateToUrl
 
                             )
                         }
